@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {createUser, logIn} = require("./userController")
+const {createUser, logIn, addDeck, getDecks, deleteDeck, addKanji, deleteKanji} = require("./userController")
 
 
 /* GET users listing. */
@@ -11,5 +11,15 @@ router.get('/', function(req, res, next) {
 router.post("/create-user", createUser)
 
 router.post("/log-in", logIn)
+
+router.post('/add-deck', addDeck)
+
+router.post('/get-decks', getDecks)
+
+router.post('/delete-deck', deleteDeck)
+
+router.post('/add-kanji', addKanji)
+
+router.post('/delete-kanji', deleteKanji)
 
 module.exports = router;
