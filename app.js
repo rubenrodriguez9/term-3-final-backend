@@ -12,6 +12,7 @@ const cors = require('cors');
 const { log } = require('console');
 
 var app = express();
+require('dotenv').config()
 
 mongoose
 .connect('mongodb://localhost:27017/kanji', {

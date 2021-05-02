@@ -47,12 +47,13 @@ module.exports = {
 
     logIn : async(req, res) => {
 
-      
+    
         
         try {
             console.log('trying');
+            console.log(process.env.SECRET_KEY);
             let foundEmail   = await User.findOne({email: req.body.email})
-            console.log(foundEmail);
+           
             if(!foundEmail || foundEmail === null){
                 throw {
                     message: 'No User found, please sign up!',
@@ -63,7 +64,6 @@ module.exports = {
             else {let comparedPassword = await bcrypt.compare(
                 req.body.password,
                 foundEmail.password )
-            
             if(!comparedPassword){
                 throw {
                     message: 'Please check your email and password.',
@@ -71,12 +71,11 @@ module.exports = {
                 }
             }}
             
-            let token = jwt.sign({email: foundEmail.email, _id: foundEmail.id}, 'SECRET_KEY', {expiresIn :'7d'})
-            console.log(token);
+            let token = jwt.sign({email: foundEmail.email, _id: foundEmail.id}, process.env.SECRET_KEY, {expiresIn :'7d'})
+           
             res.json({
                 jwtToken:token
             })
-
         } catch (error) {
 
            if(error.status === 404){
