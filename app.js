@@ -13,9 +13,9 @@ const { log } = require('console');
 
 var app = express();
 require('dotenv').config()
-
+//'mongodb://localhost:27017/kanji',
 mongoose
-.connect('mongodb://localhost:27017/kanji', {
+.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
